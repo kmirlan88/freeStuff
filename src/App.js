@@ -10,10 +10,10 @@ function App() {
             Home
           </a>
           <a class="item">
-            Messages
+            Get Free Stuff
           </a>
           <a class="item">
-            Friends
+            Post Free Stuff
           </a>
           <div class="right menu">
             <div class="item">
