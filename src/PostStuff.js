@@ -1,11 +1,11 @@
 import React from "react";
-import Navbar from "./Navbar";
-import Form from "./Form";
+import Navigation from "./Navigation";
+import Form from "./Forma";
 
 function PostStuff() {
 	return (
 		<div className="PostStuff">
-			<Navbar />
+			<Navigation />
 			<Form />
 		</div>
 	);
