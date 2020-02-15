@@ -1,10 +1,10 @@
 import React from "react";
-import Navbar from "./Navbar";
+import Navigation from "./Navigation";
 
 function GetStuff() {
 	return (
 		<div className="GetStuff">
-			<Navbar />
+			<Navigation />
 		</div>
 	);
 }
