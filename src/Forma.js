@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Form, Col, FormControl, FormGroup, Image } from "react-bootstrap";
+import axios from "axios";
+
 
 function Forma() {
 	const [state, setState] = React.useState({
@@ -21,13 +23,21 @@ function Forma() {
 		});
 	}
 
-	const getInputData = event => {
+	function handlePost(event) {
 		event.preventDefault();
-		console.log(state);
-		// performSearch(event.target.value);
-	};
+		console.log(state)
+		axios.post("http://localhost:3001/poststuff", {state})
+			.then(res => {
+				window.location = "/login";
+			})
+			.catch(err => {
+				// handle eror on front;
+			});
+	}
+	
+	
 	return (
-		<Form onSubmit={getInputData}>
+		<Form>
 			<Form.Group controlId="itemName">
 				<Form.Label>Item Name</Form.Label>
 				<Form.Control
@@ -96,8 +106,7 @@ function Forma() {
 				value={state.img}
 				onChange={handleChange}
 				alt="placeholder"
-				rounded
-				></Image>
+				rounded></Image>
 
 			<FormGroup>
 				<Form.Label>Descripton:</Form.Label>
@@ -111,7 +120,7 @@ function Forma() {
 				/>
 			</FormGroup>
 
-			<Button variant="primary" type="submit">
+			<Button variant="primary" type="submit" onClick={handlePost}>
 				Submit
 			</Button>
 		</Form>
