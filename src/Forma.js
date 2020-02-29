@@ -28,19 +28,19 @@ function Forma() {
 		console.log(state)
 		axios.post("http://localhost:3001/poststuff", {state})
 			.then(res => {
-				window.location = "/login";
+				window.location = "/getstuff";
 			})
 			.catch(err => {
 				// handle eror on front;
 			});
 	}
 	
-	
 	return (
-		<Form>
+		<Form validated onSubmit={handlePost}>
 			<Form.Group controlId="itemName">
 				<Form.Label>Item Name</Form.Label>
 				<Form.Control
+					required
 					name="itemName"
 					placeholder="Item Name"
 					value={state.itemName}
@@ -120,7 +120,7 @@ function Forma() {
 				/>
 			</FormGroup>
 
-			<Button variant="primary" type="submit" onClick={handlePost}>
+			<Button variant="primary" type="submit">
 				Submit
 			</Button>
 		</Form>
