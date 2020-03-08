@@ -19,8 +19,8 @@ function GetStuff() {
 		axios
 		.get('http://localhost:3001/getstuff')
 		.then(res => {
-			console.log(res.config.url)
-			setState(res.config.url)
+			console.log(res.data)
+			setState(res.data)
 		})
 		.catch(err => {
 			//
@@ -31,7 +31,7 @@ function GetStuff() {
 		data()
 	}, [])
 	
-	console.log(typeof state)
+	console.log(state)
 
 	let banana = state.map(obj => {
 				return <Stuff data={obj} />
