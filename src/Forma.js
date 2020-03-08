@@ -1,18 +1,19 @@
 import React from "react";
-import { Button, Form, Col, FormControl, FormGroup, Image } from "react-bootstrap";
+import { Button, Form, Col, FormControl, FormGroup, Row, Container } from "react-bootstrap";
 import axios from "axios";
 
 
 function Forma() {
 	const [state, setState] = React.useState({
-		itemName: "",
-		street: "",
-		street2: "",
-		state: "",
-		city: "",
-		img: "",
-		descr: "",
-		zip: ""
+		itemName: null,
+		street: null,
+		street2: null,
+		state: null,
+		city: null,
+		img: null,
+		descr: null,
+		zip: null,
+		file: null
 	});
 
 	function handleChange(evt) {
@@ -23,10 +24,22 @@ function Forma() {
 		});
 	}
 
+	function handleFileChange(evt) {
+		const value = evt.target.files[0];
+		setState({
+			...state,
+			file: value
+		});
+	}
+
 	function handlePost(event) {
 		event.preventDefault();
 		console.log(state)
-		axios.post("http://localhost:3001/poststuff", {state})
+		const data = new FormData()
+		for (const [key, value] of Object.entries(state)){
+			data.append(key, value)
+		}
+		axios.post("http://localhost:3001/poststuff", data)
 			.then(res => {
 				window.location = "/getstuff";
 			})
@@ -36,7 +49,7 @@ function Forma() {
 	}
 	
 	return (
-		<Form validated onSubmit={handlePost}>
+		<Form onSubmit={handlePost}>
 			<Form.Group controlId="itemName">
 				<Form.Label>Item Name</Form.Label>
 				<Form.Control
@@ -99,14 +112,18 @@ function Forma() {
 					/>
 				</Form.Group>
 			</Form.Row>
-
-			<Image
-				src="https://semantic-ui.com/images/wireframe/square-image.png"
-				name="img"
-				value={state.img}
-				onChange={handleChange}
-				alt="placeholder"
-				rounded></Image>
+			<Form.Row>
+				<Form.Group as={Col}>
+					<Form.Label>Choose File</Form.Label>
+					<Form.Control
+						type="file"
+						name="file"
+						id="file"
+						value={state.img}
+						onChange={handleFileChange}
+					/>
+				</Form.Group>
+			</Form.Row>
 
 			<FormGroup>
 				<Form.Label>Descripton:</Form.Label>

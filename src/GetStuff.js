@@ -8,7 +8,8 @@ import {
 	Col,
 	FormControl,
 	FormGroup,
-	Image
+	Image,
+	Row
 } from "react-bootstrap";
 
 function GetStuff() {
@@ -18,8 +19,8 @@ function GetStuff() {
 		axios
 		.get('http://localhost:3001/getstuff')
 		.then(res => {
-			console.log(res.data)
-			setState(res.data)
+			console.log(res.config.url)
+			setState(res.config.url)
 		})
 		.catch(err => {
 			//
@@ -30,7 +31,6 @@ function GetStuff() {
 		data()
 	}, [])
 	
-	console.log('state is: ', state[3])
 	console.log(typeof state)
 
 	let banana = state.map(obj => {
@@ -39,14 +39,21 @@ function GetStuff() {
 	console.log(banana)
 	
 	return (
-		<>
 		<div className="GetStuff">
 			<Navigation />
 			<Container fluid="md">
-				{banana}
+				<Row>
+					<Col></Col>
+					<Col>Free Items</Col>
+					<Col></Col>
+				</Row>
+				<Row>
+					<Col></Col>
+					<Col>{banana}</Col>
+					<Col></Col>
+				</Row>
 			</Container>
 		</div>
-		</>
 	);
 }
 

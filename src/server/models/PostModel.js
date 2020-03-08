@@ -11,7 +11,8 @@ const postModel = new Schema(
 		city: String,
 		img: String,
 		descr: String,
-		zip: String
+		zip: String,
+		file: Object
 	},
 	{ collection: "freeStuff" }
 );
