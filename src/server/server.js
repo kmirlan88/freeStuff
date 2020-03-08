@@ -60,22 +60,23 @@ app.get("/getstuff", (req, res) => {
 				err: "No files exists"
 			})
 		}
-		
-		files.map(file => {
-			const readstream = gfs.createReadStream(file.filename);
-			readstream.pipe(res);
-		})
-
+		return res.json(files);
 	})
-
-	// PostModel.find((err, freeStuff) => {
-	// 	if (err) {
-	// 		return console.log(err);
-	// 	}
-	// 	return res.json(freeStuff);
-	// });
-
+	
 });
+
+app.get("/image/:filename", (req, res) => {
+
+	gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+		if (!file || file.length === 0) {
+			return res.status(404).json({
+				err: "No files exists"
+			});
+		}
+		const readstream = gfs.createReadStream(file.filename);
+		readstream.pipe(res);
+	})
+})
 
 
 app.post("/poststuff", upload.single('file'), (req, res) => {
