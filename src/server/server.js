@@ -54,15 +54,22 @@ app.use(bodyParser.json());
 
 app.get("/getstuff", (req, res) => {
 	
-	gfs.files.find().toArray((err, files) => {
-		if(!files || files.length === 0){
-			return res.status(404).json({
-				err: "No files exists"
-			})
+	// gfs.files.find().toArray((err, files) => {
+	// 	if(!files || files.length === 0){
+	// 		return res.status(404).json({
+	// 			err: "No files exists"
+	// 		})
+	// 	}
+	// 	return res.json(files);
+	// })
+
+	PostModel.find((err, freeStuff) => {
+		if (err) {
+			return console.log(err);
 		}
-		return res.json(files);
-	})
-	
+		console.log(freeStuff)
+		return res.json(freeStuff);
+	});
 });
 
 app.get("/image/:filename", (req, res) => {
