@@ -39,7 +39,8 @@ function Forma() {
 		for (const [key, value] of Object.entries(state)){
 			data.append(key, value)
 		}
-		axios.post("http://localhost:3001/poststuff", data)
+		axios
+			.post("https://free-stuff.herokuapp.com/poststuff", data)
 			.then(res => {
 				window.location = "/getstuff";
 			})

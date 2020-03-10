@@ -17,13 +17,13 @@ function GetStuff() {
 	
 	const data = () => {
 		axios
-		.get('http://localhost:3001/getstuff')
-		.then(res => {
-			setState(res.data)
-		})
-		.catch(err => {
-			//
-		})
+			.get("https://free-stuff.herokuapp.com/getstuff")
+			.then(res => {
+				setState(res.data);
+			})
+			.catch(err => {
+				//
+			});
 	}
 
 	useEffect(() => {
