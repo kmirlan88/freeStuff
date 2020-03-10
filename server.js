@@ -13,6 +13,8 @@ const Grid = require('gridfs-stream')
 
 const mongoURI = "mongodb+srv://kmirlan88:plainfish615@cluster0-6zfdu.mongodb.net/mirlan";
 
+const port = process.env.PORT || 3001;
+
 mongoose.connect(
 	mongoURI,
 	{ useUnifiedTopology: true, useNewUrlParser: true }
@@ -46,22 +48,13 @@ const storage = new GridFsStorage({
 });
 const upload = multer({ storage });
 
-let port = process.env.PORT || 3000;
 app.use(cors())
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json());
+app.use(express.static(path.join(__dirname, 'frontend/build')))
 
 
 app.get("/getstuff", (req, res) => {
-	
-	// gfs.files.find().toArray((err, files) => {
-	// 	if(!files || files.length === 0){
-	// 		return res.status(404).json({
-	// 			err: "No files exists"
-	// 		})
-	// 	}
-	// 	return res.json(files);
-	// })
 
 	PostModel.find((err, freeStuff) => {
 		if (err) {
@@ -100,6 +93,6 @@ app.post("/poststuff", upload.single('file'), (req, res) => {
 });
 
 
-app.listen(3001, () => {
-    console.log('App is listening on port 3001!')
-})
+app.listen(port, () => {
+	console.log(`App is listening on port ${port}`);
+});
