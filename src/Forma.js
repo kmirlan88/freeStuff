@@ -49,7 +49,7 @@ function Forma() {
 	}
 	
 	return (
-		<Form onSubmit={handlePost}>
+		<Form validated onSubmit={handlePost}>
 			<Form.Group controlId="itemName">
 				<Form.Label>Item Name</Form.Label>
 				<Form.Control
@@ -121,6 +121,7 @@ function Forma() {
 						id="file"
 						value={state.img}
 						onChange={handleFileChange}
+						required
 					/>
 				</Form.Group>
 			</Form.Row>
@@ -134,6 +135,7 @@ function Forma() {
 					value={state.descr}
 					onChange={handleChange}
 					placeholder="Description..."
+					required
 				/>
 			</FormGroup>
 

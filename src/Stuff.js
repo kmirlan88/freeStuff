@@ -6,26 +6,27 @@ import axios from "axios";
 
 function Stuff(props) {
 	
-	console.log(props.data.filename)
+	console.log(props)
 	let itemName = props.data.itemName
-	let imgUrl = `http://localhost:3001/image/${props.data.filename}`;
+	let imgUrl = `http://localhost:3001/image/${props.data.file}`;
 	console.log(imgUrl)
+
 	function handleGetImage(imgUrl){
-	axios
-			.get(imgUrl)
-			.then(res => {
-				console.log(res)
-			})
-			.catch(err => {
-				// handle eror on front;
-			});
+		axios
+				.get(imgUrl)
+				.then(res => {
+					console.log(res)
+				})
+				.catch(err => {
+					// handle eror on front;
+				});
 	}
 	
 	return (
 		<ListGroup defaultActiveKey="#link1" onClick={handleGetImage(imgUrl)}>
-			<ListGroup.Item action>
+			<ListGroup.Item action key={props.data._id}>
 				{itemName}
-				<Image src={imgUrl} fluid />
+				<Image src={imgUrl} className="w-25" />
 			</ListGroup.Item>
 		</ListGroup>
 	);
