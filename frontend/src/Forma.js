@@ -42,12 +42,17 @@ function Forma() {
 		axios
 			.post("/poststuff", data)
 			.then(res => {
-				window.location = "/getstuff";
+				console.log(res)
 			})
 			.catch(err => {
 				// handle eror on front;
 			});
 	}
+
+	const [show, setShow] = useState(false);
+
+	const handleClose = () => setShow(false);
+	const handleShow = () => setShow(true);
 	
 	return (
 		<Form validated onSubmit={handlePost}>
@@ -140,9 +145,24 @@ function Forma() {
 				/>
 			</FormGroup>
 
-			<Button variant="primary" type="submit">
+			<Button variant="primary" type="submit" onClick={handleShow}>
 				Submit
 			</Button>
+
+			<Modal show={show} onHide={handleClose}>
+				<Modal.Header closeButton>
+					<Modal.Title>Modal heading</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+				<Modal.Footer>
+					<Button variant="secondary" onClick={handleClose}>
+						Close
+					</Button>
+					<Button variant="primary" onClick={handleClose}>
+						Save Changes
+					</Button>
+				</Modal.Footer>
+			</Modal>
 		</Form>
 	);
 }
