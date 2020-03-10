@@ -17,7 +17,7 @@ function GetStuff() {
 	
 	const data = () => {
 		axios
-			.get("http://free-stuff.herokuapp.com/getstuff")
+			.get("/getstuff")
 			.then(res => {
 				setState(res.data);
 			})

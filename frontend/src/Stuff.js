@@ -8,7 +8,7 @@ function Stuff(props) {
 	
 	console.log(props)
 	let itemName = props.data.itemName
-	let imgUrl = `http://free-stuff.herokuapp.com/image/${props.data.file}`;
+	let imgUrl = `/image/${props.data.file}`;
 	console.log(imgUrl)
 
 	function handleGetImage(imgUrl){
