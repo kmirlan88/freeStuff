@@ -40,7 +40,7 @@ function Forma() {
 			data.append(key, value)
 		}
 		axios
-			.post("https://free-stuff.herokuapp.com/poststuff", data)
+			.post("http://free-stuff.herokuapp.com/poststuff", data)
 			.then(res => {
 				window.location = "/getstuff";
 			})
