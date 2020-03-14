@@ -1,6 +1,7 @@
 import React from "react";
-import { Button, Form, Col, FormControl, FormGroup, Row, Container } from "react-bootstrap";
+import { Button, Form, Col, FormControl, FormGroup, Row, Modal } from "react-bootstrap";
 import axios from "axios";
+import { Redirect } from 'react-router-dom'
 
 
 function Forma() {
@@ -43,13 +44,14 @@ function Forma() {
 			.post("/poststuff", data)
 			.then(res => {
 				console.log(res)
+				return <Redirect to='/getstuff' />
 			})
 			.catch(err => {
 				// handle eror on front;
 			});
 	}
 
-	const [show, setShow] = useState(false);
+	const [show, setShow] = React.useState(false);
 
 	const handleClose = () => setShow(false);
 	const handleShow = () => setShow(true);
