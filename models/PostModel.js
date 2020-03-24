@@ -12,7 +12,9 @@ const postModel = new Schema(
 		img: String,
 		descr: String,
 		zip: String,
-		file: Object
+		file: Object,
+		lng: Number,
+		lat: Number
 	},
 	{ collection: "freeStuff" }
 );

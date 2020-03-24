@@ -2,6 +2,8 @@ import React from "react";
 import { Button, Form, Col, FormControl, FormGroup, Row, Modal } from "react-bootstrap";
 import axios from "axios";
 import { Redirect } from 'react-router-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 
 function Forma() {
@@ -43,21 +45,33 @@ function Forma() {
 		axios
 			.post("/poststuff", data)
 			.then(res => {
-				console.log(res)
-				return <Redirect to='/getstuff' />
+				console.log(res);
 			})
 			.catch(err => {
 				// handle eror on front;
 			});
 	}
 
-	const [show, setShow] = React.useState(false);
+	const handleSubmit = (event) => {
+		handlePost(event)
+		handleShow()
+	}
 
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+	const [show, setShow] = React.useState(false)
 	
+	const renderRedirect = () => {
+		if (redirect){
+			return <Redirect to="getstuff" />;
+		}
+	}
+
+	const handleShow = () => setShow(true)
+
+	const [redirect, setRedirect] = React.useState(false);
+	const handleRedirect = () => setRedirect(true)
+
 	return (
-		<Form validated onSubmit={handlePost}>
+		<Form validated onSubmit={handleSubmit}>
 			<Form.Group controlId="itemName">
 				<Form.Label>Item Name</Form.Label>
 				<Form.Control
@@ -117,6 +131,7 @@ function Forma() {
 						value={state.zip}
 						onChange={handleChange}
 						placeholder="Zip"
+						required
 					/>
 				</Form.Group>
 			</Form.Row>
@@ -147,24 +162,25 @@ function Forma() {
 				/>
 			</FormGroup>
 
-			<Button variant="primary" type="submit" onClick={handleShow}>
+			<Button variant="primary" type="submit">
 				Submit
 			</Button>
 
-			<Modal show={show} onHide={handleClose}>
-				<Modal.Header closeButton>
-					<Modal.Title>Modal heading</Modal.Title>
+			<Modal show={show} backdrop="static" keyboard="false">
+				<Modal.Header>
+					<Modal.Title>
+						<FontAwesomeIcon icon={faCheckCircle} size="lg" color="green" />
+						Good job!
+					</Modal.Title>
 				</Modal.Header>
-				<Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+				<Modal.Body>You posted free stuff!</Modal.Body>
 				<Modal.Footer>
-					<Button variant="secondary" onClick={handleClose}>
-						Close
-					</Button>
-					<Button variant="primary" onClick={handleClose}>
-						Save Changes
+					<Button variant="primary" onClick={handleRedirect}>
+						OK
 					</Button>
 				</Modal.Footer>
 			</Modal>
+			{renderRedirect()}
 		</Form>
 	);
 }

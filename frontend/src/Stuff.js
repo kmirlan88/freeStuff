@@ -2,7 +2,7 @@ import React from "react";
 import {
 	ListGroup, Image
 } from "react-bootstrap";
-import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 function Stuff(props) {
 	
@@ -11,24 +11,25 @@ function Stuff(props) {
 	let imgUrl = `/image/${props.data.file}`;
 	console.log(imgUrl)
 
-	function handleGetImage(imgUrl){
-		axios
-				.get(imgUrl)
-				.then(res => {
-					console.log(res)
-				})
-				.catch(err => {
-					// handle eror on front;
-				});
-	}
-	
+	const renderRedirect = () => {
+		if (redirect) {
+			return <Redirect to={{pathname:`stuff/${props.data._id}`, state:{props}}} />;
+		}
+	};
+
+	const [redirect, setRedirect] = React.useState(false);
+	const handleRedirect = () => setRedirect(true);
+
 	return (
-		<ListGroup defaultActiveKey="#link1" onClick={handleGetImage(imgUrl)}>
-			<ListGroup.Item action key={props.data._id}>
-				{itemName}
-				<Image src={imgUrl} className="w-25" />
-			</ListGroup.Item>
-		</ListGroup>
+		<div>
+			<ListGroup defaultActiveKey="#link1">
+				<ListGroup.Item action key={props.data._id} onClick={handleRedirect}>
+					{itemName}
+					<Image src={imgUrl} className="w-25" />
+				</ListGroup.Item>
+			</ListGroup>
+			{renderRedirect()}
+		</div>
 	);
 }
 
