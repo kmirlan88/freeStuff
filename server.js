@@ -1,6 +1,6 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
-const request = require('request')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require("mongoose");
@@ -10,8 +10,11 @@ const crypto = require('crypto')
 const multer = require('multer')
 const GridFsStorage = require('multer-gridfs-storage')
 const Grid = require('gridfs-stream')
+const axios = require("axios");
 
-const mongoURI = "mongodb+srv://kmirlan88:plainfish615@cluster0-6zfdu.mongodb.net/mirlan";
+const mongoURI = `mongodb+srv://${process.env.MONGODB}@cluster0-6zfdu.mongodb.net/mirlan`;
+
+const geocoder = "https://maps.googleapis.com/maps/api/geocode/json?"
 
 const port = process.env.PORT || 3001;
 
@@ -78,23 +81,49 @@ app.get("/image/:filename", (req, res) => {
 	})
 })
 
+app.get("/stuff/:stuffid", (req, res) => {
+	PostModel.findById(req.params.stuffid, (err, stuff) => {
+		if (err) {
+			return console.log(err);
+		}
+		return res.json(stuff);
+	});
+});
+
 
 app.post("/poststuff", upload.single('file'), (req, res) => {
-	console.log(req.body);
 	const postModel = new PostModel(req.body);
-	console.log("req.file")
-	console.log(req.file.filename)
-	console.log(postModel)
 	postModel.file = req.file.filename
-	console.log(postModel);
-
-	postModel.save();
-	return res.status(201).json(postModel);
+	if (postModel.street == "null"){
+		postModel.street = ""
+	}
+	if (postModel.street2 == "null") {
+		postModel.street2 = "";
+	}
+	axios
+		.get(geocoder, {
+			params: {
+				key: process.env.GEOCODER_API_KEY,
+				address: `${postModel.street}, ${postModel.street2}, ${postModel.zip}`
+			}
+		})
+		.then(function(response) {
+			console.log(response)
+			console.log(response.data.results[0].geometry.location.lat);
+			console.log(response.data.results[0].geometry.location.lng);
+			postModel.lat = response.data.results[0].geometry.location.lat;
+			postModel.lng = response.data.results[0].geometry.location.lng;
+			postModel.save();
+			return res.status(201).json(postModel);
+		})
+		.catch(function(error) {
+			console.log(error);
+		});
 });
 
-app.get("*", (req, res) => {
-	res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
-});
+// app.get("*", (req, res) => {
+// 	res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
+// });
 
 app.listen(port, () => {
 	console.log(`App is listening on port ${port}`);
