@@ -43,7 +43,7 @@ function Forma() {
 			data.append(key, value)
 		}
 		axios
-			.post("http://localhost:3001/poststuff", data)
+			.post("/poststuff", data)
 			.then(res => {
 				console.log(res);
 			})

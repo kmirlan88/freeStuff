@@ -18,7 +18,7 @@ function GetStuff() {
 	
 	const data = () => {
 		 axios
-			.get("http://localhost:3001/getstuff")
+			.get("/getstuff")
 			.then(res => {
 				setState(res.data);
 			})
