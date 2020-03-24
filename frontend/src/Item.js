@@ -20,7 +20,7 @@ function GetItem(props) {
         let mounted = true;
         const loadData = async () => {
             const response = await axios.get(
-							`http://localhost:3001${props.match.url}`
+							`${props.match.url}`
                         );
             if (mounted) {
                 setState(response.data)
@@ -35,7 +35,7 @@ function GetItem(props) {
     console.log("this is Item state:");
     console.log(state);
 
-    let imgUrl = `http://localhost:3001/image/${state.file}`;
+    let imgUrl = `/image/${state.file}`;
     let itemName = state.itemName;
     
     if (state.length == 0){
