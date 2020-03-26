@@ -37,6 +37,7 @@ function GetItem(props) {
 
     let imgUrl = `/image/${state.file}`;
     let itemName = state.itemName;
+    let descr = state.descr;
     
     if (state.length == 0){
         console.log("hello")
@@ -47,34 +48,42 @@ function GetItem(props) {
 				);
     } else {
         return (
-            <div className="Item">
-                <Navigation />
-                <Container fluid="md">
-                    <Row>
-                        <Col></Col>
-                        <Col>
-                            <h1>{itemName}</h1>
-                        </Col>
-                        <Col></Col>
-                    </Row>
-                    <Row>
-                        <Col></Col>
-                        <Col>
-                            <Image src={imgUrl} />
-                        </Col>
-                        <Col></Col>
-                    </Row>
-                    <Row>
-                        <Col></Col>
-                        <Col>
-                            <h4>Location:</h4>
-                            <Gmap data={state} />
-                        </Col>
-                        <Col></Col>
-                    </Row>
-                </Container>
-            </div>
-        );
+					<div className="Item">
+						<Navigation />
+						<Container fluid="md">
+							<Row>
+								<Col></Col>
+								<Col>
+									<h1>{itemName}</h1>
+								</Col>
+								<Col></Col>
+							</Row>
+							<Row>
+								<Col></Col>
+								<Col>
+									<Image src={imgUrl} />
+								</Col>
+								<Col></Col>
+							</Row>
+							<Row>
+								<Col></Col>
+								<Col>
+									<h4>Location:</h4>
+									<Gmap data={state} />
+								</Col>
+								<Col></Col>
+							</Row>
+							<Row>
+								<Col></Col>
+								<Col>
+									<h4>Description:</h4>
+									<p style={{fontSize: 24}}>{descr}</p>
+								</Col>
+								<Col></Col>
+							</Row>
+						</Container>
+					</div>
+				);
     }
 	
 }
