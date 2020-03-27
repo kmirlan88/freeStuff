@@ -68,16 +68,16 @@ function GetItem(props) {
 							<Row>
 								<Col></Col>
 								<Col>
-									<h4>Location:</h4>
-									<Gmap data={state} />
+									<h4>Description:</h4>
+									<p style={{ fontSize: 24 }}>{descr}</p>
 								</Col>
 								<Col></Col>
 							</Row>
 							<Row>
 								<Col></Col>
 								<Col>
-									<h4>Description:</h4>
-									<p style={{fontSize: 24}}>{descr}</p>
+									<h4>Location:</h4>
+									<Gmap data={state} />
 								</Col>
 								<Col></Col>
 							</Row>
