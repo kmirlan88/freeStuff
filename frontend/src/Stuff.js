@@ -8,7 +8,7 @@ function Stuff(props) {
 	
 	console.log(props)
 	let itemName = props.data.itemName
-	let imgUrl = `/image/${props.data.file}`;
+	let imgUrl = `http:localhost:3001/image/${props.data.file}`;
 	console.log(imgUrl)
 
 	const renderRedirect = () => {
@@ -24,9 +24,9 @@ function Stuff(props) {
 		<div>
 			<ListGroup defaultActiveKey="#link1">
 				<ListGroup.Item action key={props.data._id} onClick={handleRedirect}>
-					{itemName}
+					<strong>{itemName}</strong>
 					<br></br>
-					<Image src={imgUrl} className="w-70" />
+					<Image src={imgUrl} className="w-65" />
 				</ListGroup.Item>
 			</ListGroup>
 			{renderRedirect()}

@@ -153,14 +153,14 @@ function Forma() {
 			</Form.Row>
 
 			<FormGroup>
-				<Form.Label>Descripton*</Form.Label>
+				<Form.Label>Descripton and contact info*</Form.Label>
 				<FormControl
 					as="textarea"
 					aria-label="With textarea"
 					name="descr"
 					value={state.descr}
 					onChange={handleChange}
-					placeholder="Description..."
+					placeholder="Description and contact info..."
 					required
 				/>
 			</FormGroup>
