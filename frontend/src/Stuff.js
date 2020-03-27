@@ -25,7 +25,8 @@ function Stuff(props) {
 			<ListGroup defaultActiveKey="#link1">
 				<ListGroup.Item action key={props.data._id} onClick={handleRedirect}>
 					{itemName}
-					<Image src={imgUrl} className="w-25" />
+					<br></br>
+					<Image src={imgUrl} className="w-50" />
 				</ListGroup.Item>
 			</ListGroup>
 			{renderRedirect()}

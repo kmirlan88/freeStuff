@@ -42,10 +42,10 @@ function GetStuff() {
 	return (
 		<div className="GetStuff">
 			<Navigation />
-			<Container fluid="md">
+			<Container fluid="md" className="mt-sm-5">
 				<Row>
 					<Col></Col>
-					<Col>Free Items</Col>
+					<Col>Free stuff</Col>
 					<Col></Col>
 				</Row>
 				<Row>

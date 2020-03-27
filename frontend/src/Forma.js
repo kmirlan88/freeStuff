@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Form, Col, FormControl, FormGroup, Row, Modal } from "react-bootstrap";
+import { Button, Form, Col, FormControl, FormGroup, Row, Modal, InputGroup } from "react-bootstrap";
 import axios from "axios";
 import { Redirect } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -71,9 +71,9 @@ function Forma() {
 	const handleRedirect = () => setRedirect(true)
 
 	return (
-		<Form validated onSubmit={handleSubmit}>
+		<Form onSubmit={handleSubmit} className="mt-sm-5">
 			<Form.Group controlId="itemName">
-				<Form.Label>Item Name</Form.Label>
+				<Form.Label>Item Name*</Form.Label>
 				<Form.Control
 					required
 					name="itemName"
@@ -125,7 +125,7 @@ function Forma() {
 				</Form.Group>
 
 				<Form.Group as={Col} controlId="formGridZip">
-					<Form.Label>Zip</Form.Label>
+					<Form.Label>Zip*</Form.Label>
 					<Form.Control
 						name="zip"
 						value={state.zip}
@@ -137,20 +137,23 @@ function Forma() {
 			</Form.Row>
 			<Form.Row>
 				<Form.Group as={Col}>
-					<Form.Label>Choose File</Form.Label>
-					<Form.Control
-						type="file"
-						name="file"
-						id="file"
-						value={state.img}
-						onChange={handleFileChange}
-						required
-					/>
+					<div className="custom-file">
+						<Form.Control
+							type="file"
+							name="file"
+							id="file"
+							value={state.img}
+							onChange={handleFileChange}
+							required
+							className="custom-file-input"
+						/>
+						<Form.Label className="custom-file-label" for="file">Choose Image*</Form.Label>
+					</div>
 				</Form.Group>
 			</Form.Row>
 
 			<FormGroup>
-				<Form.Label>Descripton:</Form.Label>
+				<Form.Label>Descripton*</Form.Label>
 				<FormControl
 					as="textarea"
 					aria-label="With textarea"
@@ -162,7 +165,7 @@ function Forma() {
 				/>
 			</FormGroup>
 
-			<Button variant="primary" type="submit">
+			<Button variant="info" type="submit" block size="lg">
 				Submit
 			</Button>
 
