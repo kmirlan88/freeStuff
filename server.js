@@ -57,7 +57,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'frontend/build')))
 
 
-app.get("/getstuff", (req, res) => {
+app.get("/getstufff", (req, res) => {
 
 	PostModel.find((err, freeStuff) => {
 		if (err) {

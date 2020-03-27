@@ -18,7 +18,7 @@ function GetStuff() {
 	
 	const data = () => {
 		 axios
-			.get("/getstuff")
+			.get("/getstufff")
 			.then(res => {
 				setState(res.data);
 			})
