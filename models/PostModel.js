@@ -14,7 +14,8 @@ const postModel = new Schema(
 		zip: String,
 		file: Object,
 		lng: Number,
-		lat: Number
+		lat: Number,
+		comments: Array
 	},
 	{ collection: "freeStuff" }
 );

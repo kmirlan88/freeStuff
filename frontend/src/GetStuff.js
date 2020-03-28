@@ -35,7 +35,6 @@ function GetStuff() {
 	console.log(state)
 
 	let banana = state.map(obj => {
-				
 				return <Stuff data={obj} />
 			})
 	
@@ -45,7 +44,9 @@ function GetStuff() {
 			<Container fluid="md" className="mt-sm-5">
 				<Row>
 					<Col></Col>
-					<Col>Free stuff</Col>
+					<Col>
+						<h3>FreeStuff</h3>
+					</Col>
 					<Col></Col>
 				</Row>
 				<Row>

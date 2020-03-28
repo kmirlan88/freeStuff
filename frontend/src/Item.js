@@ -7,10 +7,11 @@ import {
 	Container,
 	Col,
 	FormControl,
-	FormGroup,
+	ListGroup,
 	Image,
 	Row
 } from "react-bootstrap";
+import Comments from "./Comments"
 
 function GetItem(props) {
 
@@ -50,34 +51,24 @@ function GetItem(props) {
         return (
 					<div className="Item">
 						<Navigation />
-						<Container fluid="md">
+						<Container fluid="md" className="mt-sm-5 mb-sm-5">
 							<Row>
 								<Col></Col>
 								<Col>
-									<h1>{itemName}</h1>
-								</Col>
-								<Col></Col>
-							</Row>
-							<Row>
-								<Col></Col>
-								<Col>
-									<Image src={imgUrl} />
-								</Col>
-								<Col></Col>
-							</Row>
-							<Row>
-								<Col></Col>
-								<Col>
-									<h4>Description:</h4>
-									<p style={{ fontSize: 24 }}>{descr}</p>
-								</Col>
-								<Col></Col>
-							</Row>
-							<Row>
-								<Col></Col>
-								<Col>
-									<h4>Location:</h4>
-									<Gmap data={state} />
+									<ListGroup defaultActiveKey="#link1">
+										<ListGroup.Item>
+											<h1>{itemName}</h1>
+											<Image src={imgUrl} />
+											<h4 className="mt-sm-3">Description:</h4>
+											<p style={{ fontSize: 18 }} className="text-info">
+												{descr}
+											</p>
+											<h4>Location:</h4>
+											<Gmap data={state} />
+											<h4>Comments:</h4>
+											<Comments data={state}/>
+										</ListGroup.Item>
+									</ListGroup>
 								</Col>
 								<Col></Col>
 							</Row>
