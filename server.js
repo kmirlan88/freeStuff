@@ -63,8 +63,16 @@ app.get("/getstufff", (req, res) => {
 		if (err) {
 			return console.log(err);
 		}
-		console.log(freeStuff)
 		return res.json(freeStuff);
+	});
+});
+
+app.get("/getcomments", (req, res) => {
+	PostModel.findById(req.query._id, (err, stuff) => {
+		if (err) {
+			return console.log(err);
+		}
+		return res.json(stuff);
 	});
 });
 
@@ -108,7 +116,6 @@ app.post("/poststuff", upload.single('file'), (req, res) => {
 			}
 		})
 		.then(function(response) {
-			console.log(response)
 			console.log(response.data.results[0].geometry.location.lat);
 			console.log(response.data.results[0].geometry.location.lng);
 			postModel.lat = response.data.results[0].geometry.location.lat;
@@ -123,6 +130,18 @@ app.post("/poststuff", upload.single('file'), (req, res) => {
 
 app.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname + "/frontend/build/index.html"));
+});
+
+app.post("/comment", (req, res) => {
+	const postModel = new PostModel();
+	console.log(req.body)
+	PostModel.findByIdAndUpdate(req.body.id, {$push: {comments: req.body.text}}, (err, stuff) => {
+		if (err) {
+			return console.log(err);
+		}
+		return res.status(201).json(postModel);
+	});
+	
 });
 
 app.listen(port, () => {

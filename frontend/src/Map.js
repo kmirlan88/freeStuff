@@ -19,7 +19,7 @@ function Gmap(data){
 
 	const WrappedMap = withScriptjs(withGoogleMap(Map));
 	return (
-		<div style={{ height: "400px", width: "600px" }}>
+		<div style={{ height: "400px", width: "100%" }}>
 			<WrappedMap
 				googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyB8bmgkmU8MznyLTr4YcLdPJjczXWaUemE`}
 				loadingElement={<div style={{ height: "100%" }} />}
